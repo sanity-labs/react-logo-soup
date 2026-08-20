@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
 import { createLogoSoup } from "../core/create-logo-soup";
-import { logosEqual } from "../core/normalize";
+import { backgroundColorsEqual, logosEqual } from "../core/normalize";
 import type { LogoSoupState } from "../core/types";
 import type { UseLogoSoupOptions, UseLogoSoupResult } from "./types";
 
@@ -12,6 +12,18 @@ const SERVER_SNAPSHOT: LogoSoupState = {
 
 function getServerSnapshot(): LogoSoupState {
   return SERVER_SNAPSHOT;
+}
+
+/**
+ * Returns a referentially stable value across renders as long as `isEqual`
+ * holds, so inline literals (arrays, tuples) don't re-fire effects forever.
+ */
+function useStableValue<T>(value: T, isEqual: (a: T, b: T) => boolean): T {
+  const ref = useRef(value);
+  if (!isEqual(ref.current, value)) {
+    ref.current = value;
+  }
+  return ref.current;
 }
 
 export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
@@ -30,15 +42,11 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
 
   const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  // Stabilize the logos array reference to prevent infinite re-renders.
-  // Without this, a new array literal in the parent's render (e.g. logos={[a, b]})
-  // causes useEffect to re-fire, which calls process(), which emits a state change,
-  // which triggers useSyncExternalStore to re-render, which creates a new array, etc.
-  const logosRef = useRef(options.logos);
-  if (!logosEqual(logosRef.current, options.logos)) {
-    logosRef.current = options.logos;
-  }
-  const stableLogos = logosRef.current;
+  const stableLogos = useStableValue(options.logos, logosEqual);
+  const backgroundColor = useStableValue(
+    options.backgroundColor,
+    backgroundColorsEqual,
+  );
 
   const {
     baseSize,
@@ -47,7 +55,6 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
     densityAware,
     densityFactor,
     cropToContent,
-    backgroundColor,
   } = options;
 
   // Holds a deferred destroy timer so that StrictMode remounts can cancel it

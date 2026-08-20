@@ -306,4 +306,45 @@ describe("createLogoSoup", () => {
 
     engine.destroy();
   });
+
+  test("re-processing identical inputs keeps the snapshot referentially stable", async () => {
+    installMockImage();
+    const engine = createLogoSoup();
+
+    const options = {
+      logos: ["a.png", "b.png"],
+      baseSize: 48,
+      scaleFactor: 0.5,
+      backgroundColor: [255, 255, 255] as [number, number, number],
+    };
+
+    engine.process(options);
+
+    await waitFor(() => {
+      expect(engine.getSnapshot().status).toBe("ready");
+    });
+
+    const ready = engine.getSnapshot();
+    let emitted = 0;
+    engine.subscribe(() => {
+      emitted++;
+    });
+
+    // Same inputs, new object/array references — must not emit or change state
+    engine.process({
+      ...options,
+      logos: ["a.png", "b.png"],
+      backgroundColor: [255, 255, 255],
+    });
+
+    expect(engine.getSnapshot()).toBe(ready);
+    expect(emitted).toBe(0);
+
+    // Changing a normalization param must still produce a new snapshot
+    engine.process({ ...options, baseSize: 96 });
+    expect(engine.getSnapshot()).not.toBe(ready);
+    expect(emitted).toBe(1);
+
+    engine.destroy();
+  });
 });
