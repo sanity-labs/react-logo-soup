@@ -12,7 +12,6 @@ import {
   DEFAULT_DENSITY_FACTOR,
   DEFAULT_SCALE_FACTOR,
 } from "../../src/core/constants";
-import type { LogoSource, MeasurementResult } from "../../src/core/types";
 import { getVisualCenterTransform } from "../../src/core/get-visual-center-transform";
 import {
   cropToDataUrl,
@@ -20,6 +19,7 @@ import {
   measureWithContentDetection,
 } from "../../src/core/measure";
 import { createNormalizedLogo } from "../../src/core/normalize";
+import type { LogoSource, MeasurementResult } from "../../src/core/types";
 import { fmtCost, fmtNs, fmtP, welchTTest } from "./welch";
 
 const origCreateElement = document.createElement.bind(document);

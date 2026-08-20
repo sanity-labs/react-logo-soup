@@ -1,4 +1,4 @@
-import { from, createEffect, onCleanup } from "solid-js";
+import { createEffect, from, onCleanup } from "solid-js";
 import { createLogoSoup as createEngine } from "../core/create-logo-soup";
 import type {
   LogoFailure,

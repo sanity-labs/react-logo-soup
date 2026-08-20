@@ -1,5 +1,4 @@
 export { LogoSoup } from "./logo-soup";
-export { useLogoSoup } from "./use-logo-soup";
 export type {
   ImageRenderProps,
   LogoSoupProps,
@@ -7,3 +6,4 @@ export type {
   UseLogoSoupOptions,
   UseLogoSoupResult,
 } from "./types";
+export { useLogoSoup } from "./use-logo-soup";

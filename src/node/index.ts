@@ -1,8 +1,13 @@
-import { createCanvas, loadImage as loadNativeImage } from "@napi-rs/canvas";
 import { readFile } from "node:fs/promises";
+import { createCanvas, loadImage as loadNativeImage } from "@napi-rs/canvas";
 import { measureContent } from "../core/measure-pixels";
 import type { MeasurementResult } from "../core/types";
 
+export { getVisualCenterTransform } from "../core/get-visual-center-transform";
+export {
+  calculateNormalizedDimensions,
+  createNormalizedLogo,
+} from "../core/normalize";
 export type {
   AlignmentMode,
   BoundingBox,
@@ -11,11 +16,6 @@ export type {
   NormalizedLogo,
   VisualCenter,
 } from "../core/types";
-export {
-  calculateNormalizedDimensions,
-  createNormalizedLogo,
-} from "../core/normalize";
-export { getVisualCenterTransform } from "../core/get-visual-center-transform";
 
 export type MeasureOptions = {
   contrastThreshold?: number;

@@ -16,6 +16,7 @@ const logoImageStyle: CSSProperties = {
 
 function DefaultImage(props: ImageRenderProps) {
   // crossOrigin must match loadImage's, or browsers re-download every logo
+  // biome-ignore lint/a11y/useAltText: alt is required in ImageRenderProps
   return <img crossOrigin="anonymous" decoding="async" {...props} />;
 }
 
@@ -79,6 +80,7 @@ export function LogoSoup({
   }
 
   return (
+    // biome-ignore lint/a11y/useSemanticElements: ul/li would inherit list styling consumers must reset
     <div
       className={className}
       style={containerStyle}
@@ -89,7 +91,9 @@ export function LogoSoup({
         const transform = getVisualCenterTransform(logo, alignBy);
 
         return (
+          // biome-ignore lint/a11y/useSemanticElements: see role="list" above
           <span
+            // biome-ignore lint/suspicious/noArrayIndexKey: src alone can repeat; index disambiguates duplicates
             key={`${logo.src}-${index}`}
             role="listitem"
             style={{

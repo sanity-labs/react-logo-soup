@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
-import { join } from "node:path";
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { createCanvas, loadImage as loadNativeImage } from "@napi-rs/canvas";
-import { measureImage, measureImages } from "../src/node/index";
 import { downsampleDimensions, scanPixels } from "../src/core/measure-pixels";
+import { measureImage, measureImages } from "../src/node/index";
 
 const LOGOS_DIR = join(import.meta.dir, "../static/logos");
 

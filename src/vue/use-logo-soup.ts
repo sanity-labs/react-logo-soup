@@ -1,19 +1,19 @@
 import {
-  shallowRef,
-  watchEffect,
-  onScopeDispose,
-  toValue,
+  type ComputedRef,
   computed,
   type MaybeRefOrGetter,
+  onScopeDispose,
   type ShallowRef,
-  type ComputedRef,
+  shallowRef,
+  toValue,
+  watchEffect,
 } from "vue";
 import { createLogoSoup } from "../core/create-logo-soup";
 import type {
   BackgroundColor,
   LogoFailure,
-  LogoSource,
   LogoSoupState,
+  LogoSource,
   NormalizedLogo,
 } from "../core/types";
 

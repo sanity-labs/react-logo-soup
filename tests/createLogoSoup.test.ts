@@ -1,4 +1,4 @@
-import { describe, expect, test, afterEach } from "bun:test";
+import { afterEach, describe, expect, test } from "bun:test";
 import { createLogoSoup } from "../src/core/create-logo-soup";
 
 const originalImage = globalThis.Image;

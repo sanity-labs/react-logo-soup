@@ -1,11 +1,5 @@
 // Core — framework-agnostic
-export { createLogoSoup } from "./core/create-logo-soup";
-export { getVisualCenterTransform } from "./core/get-visual-center-transform";
-export { cropToDataUrl } from "./core/measure";
-export {
-  calculateNormalizedDimensions,
-  createNormalizedLogo,
-} from "./core/normalize";
+
 export {
   DEFAULT_ALIGN_BY,
   DEFAULT_BASE_SIZE,
@@ -16,6 +10,13 @@ export {
   DEFAULT_GAP,
   DEFAULT_SCALE_FACTOR,
 } from "./core/constants";
+export { createLogoSoup } from "./core/create-logo-soup";
+export { getVisualCenterTransform } from "./core/get-visual-center-transform";
+export { cropToDataUrl } from "./core/measure";
+export {
+  calculateNormalizedDimensions,
+  createNormalizedLogo,
+} from "./core/normalize";
 export type {
   AlignmentMode,
   BackgroundColor,
@@ -31,7 +32,6 @@ export type {
 
 // React adapter
 export { LogoSoup } from "./react/logo-soup";
-export { useLogoSoup } from "./react/use-logo-soup";
 export type {
   ImageRenderProps,
   LogoSoupProps,
@@ -39,3 +39,4 @@ export type {
   UseLogoSoupOptions,
   UseLogoSoupResult,
 } from "./react/types";
+export { useLogoSoup } from "./react/use-logo-soup";
