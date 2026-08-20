@@ -21,6 +21,7 @@ function DefaultImage(props: ImageRenderProps) {
 
 export function LogoSoup({
   logos,
+  measurements,
   baseSize,
   scaleFactor,
   contrastThreshold,
@@ -38,6 +39,7 @@ export function LogoSoup({
 }: LogoSoupProps) {
   const { isLoading, isReady, normalizedLogos, error, failures } = useLogoSoup({
     logos,
+    measurements,
     baseSize,
     scaleFactor,
     contrastThreshold,

@@ -307,6 +307,29 @@ describe("createLogoSoup", () => {
     engine.destroy();
   });
 
+  test("seeded measurements produce a synchronous ready state with no image loads", () => {
+    globalThis.Image = class MockImage {
+      constructor() {
+        throw new Error("Image should not be constructed when seeded");
+      }
+    } as unknown as typeof Image;
+
+    const engine = createLogoSoup();
+    engine.process({
+      logos: ["a.png"],
+      measurements: {
+        "a.png": { width: 200, height: 100 },
+      },
+    });
+
+    const snapshot = engine.getSnapshot();
+    expect(snapshot.status).toBe("ready");
+    expect(snapshot.normalizedLogos).toHaveLength(1);
+    expect(snapshot.normalizedLogos[0]?.originalWidth).toBe(200);
+
+    engine.destroy();
+  });
+
   test("keeps previous results visible while a new logo set loads", async () => {
     installMockImage();
     const engine = createLogoSoup();

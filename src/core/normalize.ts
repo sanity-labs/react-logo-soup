@@ -1,3 +1,9 @@
+import {
+  DEFAULT_BASE_SIZE,
+  DEFAULT_DENSITY_AWARE,
+  DEFAULT_DENSITY_FACTOR,
+  DEFAULT_SCALE_FACTOR,
+} from "./constants";
 import type {
   BackgroundColor,
   LogoSource,
@@ -30,6 +36,24 @@ export function backgroundColorsEqual(
   return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
 }
 
+export function measurementsEqual(
+  a: Record<string, MeasurementResult> | undefined,
+  b: Record<string, MeasurementResult> | undefined,
+): boolean {
+  if (a === b) return true;
+  if (!a || !b) return false;
+  const keys = Object.keys(a);
+  if (keys.length !== Object.keys(b).length) return false;
+  return keys.every((key) => a[key] === b[key]);
+}
+
+export function resolveDensityFactor(
+  densityAware: boolean = DEFAULT_DENSITY_AWARE,
+  densityFactor: number = DEFAULT_DENSITY_FACTOR,
+): number {
+  return densityAware ? densityFactor : 0;
+}
+
 export function normalizeSource(source: string | LogoSource): LogoSource {
   if (typeof source === "string") {
     return { src: source, alt: "" };
@@ -39,8 +63,8 @@ export function normalizeSource(source: string | LogoSource): LogoSource {
 
 export function calculateNormalizedDimensions(
   measurement: MeasurementResult,
-  baseSize: number,
-  scaleFactor: number,
+  baseSize: number = DEFAULT_BASE_SIZE,
+  scaleFactor: number = DEFAULT_SCALE_FACTOR,
   densityFactor: number = 0,
 ): { width: number; height: number } {
   const contentWidth = measurement.contentBox
@@ -115,8 +139,8 @@ export function calculateNormalizedDimensions(
 export function createNormalizedLogo(
   source: LogoSource,
   measurement: MeasurementResult,
-  baseSize: number,
-  scaleFactor: number,
+  baseSize: number = DEFAULT_BASE_SIZE,
+  scaleFactor: number = DEFAULT_SCALE_FACTOR,
   densityFactor: number = 0,
 ): NormalizedLogo {
   const { width, height } = calculateNormalizedDimensions(
