@@ -35,8 +35,9 @@ export function LogoSoup({
   className,
   style,
   onNormalized,
+  onError,
 }: LogoSoupProps) {
-  const { isLoading, isReady, normalizedLogos, error } = useLogoSoup({
+  const { isLoading, isReady, normalizedLogos, error, failures } = useLogoSoup({
     logos,
     baseSize,
     scaleFactor,
@@ -54,6 +55,12 @@ export function LogoSoup({
       onNormalized(normalizedLogos);
     }
   }, [isReady, normalizedLogos, onNormalized]);
+
+  useEffect(() => {
+    if (failures.length > 0 && onError) {
+      onError(failures);
+    }
+  }, [failures, onError]);
 
   const halfGap = typeof gap === "number" ? `${gap / 2}px` : `calc(${gap} / 2)`;
 

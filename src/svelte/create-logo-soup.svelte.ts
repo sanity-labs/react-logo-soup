@@ -42,6 +42,11 @@ export function createLogoSoup() {
       return engine.getSnapshot().error;
     },
 
+    get failures() {
+      subscribe();
+      return engine.getSnapshot().failures;
+    },
+
     destroy() {
       engine.destroy();
     },

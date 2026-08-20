@@ -8,6 +8,7 @@ const SERVER_SNAPSHOT: LogoSoupState = {
   status: "idle",
   normalizedLogos: [],
   error: null,
+  failures: [],
 };
 
 function getServerSnapshot(): LogoSoupState {
@@ -101,5 +102,6 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
     isReady: state.status === "ready",
     normalizedLogos: state.normalizedLogos,
     error: state.error,
+    failures: state.failures,
   };
 }

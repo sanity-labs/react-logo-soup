@@ -11,6 +11,7 @@ import {
 import { createLogoSoup } from "../core/create-logo-soup";
 import type {
   BackgroundColor,
+  LogoFailure,
   LogoSource,
   LogoSoupState,
   NormalizedLogo,
@@ -34,6 +35,7 @@ export type UseLogoSoupReturn = {
   isReady: ComputedRef<boolean>;
   normalizedLogos: ComputedRef<NormalizedLogo[]>;
   error: ComputedRef<Error | null>;
+  failures: ComputedRef<LogoFailure[]>;
 };
 
 export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupReturn {
@@ -68,6 +70,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupReturn {
   const isReady = computed(() => state.value.status === "ready");
   const normalizedLogos = computed(() => state.value.normalizedLogos);
   const error = computed(() => state.value.error);
+  const failures = computed(() => state.value.failures);
 
-  return { state, isLoading, isReady, normalizedLogos, error };
+  return { state, isLoading, isReady, normalizedLogos, error, failures };
 }

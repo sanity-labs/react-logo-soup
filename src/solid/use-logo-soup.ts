@@ -1,6 +1,7 @@
 import { from, createEffect, onCleanup } from "solid-js";
 import { createLogoSoup as createEngine } from "../core/create-logo-soup";
 import type {
+  LogoFailure,
   LogoSoupState,
   NormalizedLogo,
   ProcessOptions,
@@ -10,6 +11,7 @@ const IDLE_STATE: LogoSoupState = {
   status: "idle",
   normalizedLogos: [],
   error: null,
+  failures: [],
 };
 
 export type UseLogoSoupResult = {
@@ -17,9 +19,12 @@ export type UseLogoSoupResult = {
   readonly isReady: boolean;
   readonly normalizedLogos: NormalizedLogo[];
   readonly error: Error | null;
+  readonly failures: LogoFailure[];
 };
 
-export function useLogoSoup(optionsFn: () => ProcessOptions): UseLogoSoupResult {
+export function useLogoSoup(
+  optionsFn: () => ProcessOptions,
+): UseLogoSoupResult {
   const engine = createEngine();
 
   // from() accepts a producer function: (setter) => unsubscribe
@@ -49,6 +54,9 @@ export function useLogoSoup(optionsFn: () => ProcessOptions): UseLogoSoupResult 
     },
     get error() {
       return (state() ?? IDLE_STATE).error;
+    },
+    get failures() {
+      return (state() ?? IDLE_STATE).failures;
     },
   };
 }

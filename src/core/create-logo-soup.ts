@@ -14,6 +14,7 @@ import {
 } from "./measure";
 import { createNormalizedLogo, normalizeSource } from "./normalize";
 import type {
+  LogoFailure,
   LogoSoupEngine,
   LogoSoupState,
   LogoSource,
@@ -28,10 +29,13 @@ interface CachedEntry {
   blobUrl?: string;
 }
 
+const NO_FAILURES: LogoFailure[] = [];
+
 const IDLE_STATE: LogoSoupState = {
   status: "idle",
   normalizedLogos: [],
   error: null,
+  failures: NO_FAILURES,
 };
 
 declare const process: { env: { PKG_VERSION?: string } };
@@ -86,7 +90,8 @@ export function createLogoSoup(): LogoSoupEngine {
     if (
       snapshot.status === next.status &&
       snapshot.normalizedLogos === next.normalizedLogos &&
-      snapshot.error === next.error
+      snapshot.error === next.error &&
+      snapshot.failures === next.failures
     ) {
       return;
     }
@@ -135,7 +140,12 @@ export function createLogoSoup(): LogoSoupEngine {
 
     // Empty logos — go straight to ready with empty results
     if (logos.length === 0) {
-      setState({ status: "ready", normalizedLogos: [], error: null });
+      setState({
+        status: "ready",
+        normalizedLogos: [],
+        error: null,
+        failures: NO_FAILURES,
+      });
       return;
     }
 
@@ -200,7 +210,12 @@ export function createLogoSoup(): LogoSoupEngine {
         return normalized;
       });
       readyKey = processKey;
-      setState({ status: "ready", normalizedLogos: results, error: null });
+      setState({
+        status: "ready",
+        normalizedLogos: results,
+        error: null,
+        failures: NO_FAILURES,
+      });
       return;
     }
 
@@ -211,7 +226,12 @@ export function createLogoSoup(): LogoSoupEngine {
     };
 
     if (!allCached) {
-      setState({ status: "loading", normalizedLogos: [], error: null });
+      setState({
+        status: "loading",
+        normalizedLogos: [],
+        error: null,
+        failures: NO_FAILURES,
+      });
     }
 
     Promise.allSettled(
@@ -262,26 +282,40 @@ export function createLogoSoup(): LogoSoupEngine {
       if (cancelled || destroyed) return;
 
       const results: NormalizedLogo[] = [];
-      let firstError: Error | undefined;
-      for (const r of settled) {
+      const failures: LogoFailure[] = [];
+      for (let i = 0; i < settled.length; i++) {
+        const r = settled[i]!;
         if (r.status === "fulfilled") {
           results.push(r.value);
-        } else if (!firstError) {
-          firstError =
-            r.reason instanceof Error
-              ? r.reason
-              : new Error("Failed to load logo");
+        } else {
+          failures.push({
+            src: sources[i]!.src,
+            error:
+              r.reason instanceof Error
+                ? r.reason
+                : new Error("Failed to load logo"),
+          });
         }
       }
 
-      if (results.length === 0 && firstError) {
+      if (results.length === 0 && failures.length > 0) {
         readyKey = null;
-        setState({ status: "error", normalizedLogos: [], error: firstError });
+        setState({
+          status: "error",
+          normalizedLogos: [],
+          error: failures[0]!.error,
+          failures,
+        });
         return;
       }
 
       readyKey = processKey;
-      setState({ status: "ready", normalizedLogos: results, error: null });
+      setState({
+        status: "ready",
+        normalizedLogos: results,
+        error: null,
+        failures: failures.length > 0 ? failures : NO_FAILURES,
+      });
     });
   }
 

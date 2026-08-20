@@ -307,6 +307,58 @@ describe("createLogoSoup", () => {
     engine.destroy();
   });
 
+  test("partial failure: reports failures but stays ready with the successes", async () => {
+    globalThis.Image = class MockImage {
+      crossOrigin = "";
+      src = "";
+      naturalWidth = 200;
+      naturalHeight = 100;
+      onload: (() => void) | null = null;
+      onerror: (() => void) | null = null;
+
+      constructor() {
+        queueMicrotask(() => {
+          if (this.src.includes("broken")) this.onerror?.();
+          else this.onload?.();
+        });
+      }
+    } as unknown as typeof Image;
+
+    const engine = createLogoSoup();
+    engine.process({ logos: ["ok.png", "broken.png"] });
+
+    await waitFor(() => {
+      expect(engine.getSnapshot().status).toBe("ready");
+    });
+
+    const snapshot = engine.getSnapshot();
+    expect(snapshot.normalizedLogos).toHaveLength(1);
+    expect(snapshot.normalizedLogos[0]?.src).toBe("ok.png");
+    expect(snapshot.error).toBe(null);
+    expect(snapshot.failures).toHaveLength(1);
+    expect(snapshot.failures[0]?.src).toBe("broken.png");
+    expect(snapshot.failures[0]?.error).toBeInstanceOf(Error);
+
+    engine.destroy();
+  });
+
+  test("total failure: failures lists every logo", async () => {
+    installMockImage({ shouldFail: true });
+    const engine = createLogoSoup();
+
+    engine.process({ logos: ["a.png", "b.png"] });
+
+    await waitFor(() => {
+      expect(engine.getSnapshot().status).toBe("error");
+    });
+
+    const snapshot = engine.getSnapshot();
+    expect(snapshot.failures).toHaveLength(2);
+    expect(snapshot.failures.map((f) => f.src)).toEqual(["a.png", "b.png"]);
+
+    engine.destroy();
+  });
+
   test("re-processing identical inputs keeps the snapshot referentially stable", async () => {
     installMockImage();
     const engine = createLogoSoup();
