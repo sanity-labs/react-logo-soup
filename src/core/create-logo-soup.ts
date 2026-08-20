@@ -71,6 +71,10 @@ export function createLogoSoup(): LogoSoupEngine {
   let prevDensityAware = false;
   let prevResolvedBg: [number, number, number] | undefined;
 
+  // Inputs behind the current "ready" snapshot; identical inputs on a warm
+  // cache skip emitting so getSnapshot() stays referentially stable
+  let readyKey: string | null = null;
+
   function emit() {
     for (const listener of listeners) {
       listener();
@@ -165,8 +169,22 @@ export function createLogoSoup(): LogoSoupEngine {
 
     const effectiveDensityFactor = densityAware ? densityFactor : 0;
 
+    const processKey = JSON.stringify([
+      sources.map((s) => [s.src, s.alt ?? ""]),
+      baseSize,
+      scaleFactor,
+      contrastThreshold,
+      densityAware,
+      effectiveDensityFactor,
+      cropToContent,
+      resolvedBg ?? null,
+    ]);
+
     // Fast path: everything is cached and no pending crops needed
     if (allCached && !needsCrop) {
+      if (snapshot.status === "ready" && processKey === readyKey) {
+        return;
+      }
       const results = sources.map((source) => {
         const entry = cache.get(source.src)!;
         const normalized = createNormalizedLogo(
@@ -181,6 +199,7 @@ export function createLogoSoup(): LogoSoupEngine {
         }
         return normalized;
       });
+      readyKey = processKey;
       setState({ status: "ready", normalizedLogos: results, error: null });
       return;
     }
@@ -256,10 +275,12 @@ export function createLogoSoup(): LogoSoupEngine {
       }
 
       if (results.length === 0 && firstError) {
+        readyKey = null;
         setState({ status: "error", normalizedLogos: [], error: firstError });
         return;
       }
 
+      readyKey = processKey;
       setState({ status: "ready", normalizedLogos: results, error: null });
     });
   }

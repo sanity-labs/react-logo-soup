@@ -228,6 +228,46 @@ describe("useLogoSoup", () => {
     globalThis.Image = originalImage;
   });
 
+  test("inline backgroundColor tuple does not cause a render loop", async () => {
+    globalThis.Image = class MockImage {
+      crossOrigin = "";
+      src = "";
+      naturalWidth = 200;
+      naturalHeight = 100;
+      onload: (() => void) | null = null;
+      onerror: (() => void) | null = null;
+
+      constructor() {
+        queueMicrotask(() => {
+          if (this.onload) this.onload();
+        });
+      }
+    } as unknown as typeof Image;
+
+    let renderCount = 0;
+
+    const { result } = renderHook(() => {
+      renderCount++;
+      // New array reference on every render — previously looped forever
+      return useLogoSoup({
+        logos: ["https://example.com/logo.png"],
+        backgroundColor: [255, 255, 255],
+      });
+    });
+
+    await waitFor(() => {
+      expect(result.current.isReady).toBe(true);
+    });
+
+    // Allow any pathological re-render cascade to reveal itself
+    await new Promise((r) => setTimeout(r, 50));
+
+    expect(renderCount).toBeLessThan(10);
+    expect(result.current.isReady).toBe(true);
+
+    globalThis.Image = originalImage;
+  });
+
   test("works correctly under React StrictMode (not stuck in loading)", async () => {
     globalThis.Image = class MockImage {
       crossOrigin = "";

@@ -1,4 +1,9 @@
-import type { LogoSource, MeasurementResult, NormalizedLogo } from "./types";
+import type {
+  BackgroundColor,
+  LogoSource,
+  MeasurementResult,
+  NormalizedLogo,
+} from "./types";
 
 export function logosEqual(
   a: (string | LogoSource)[],
@@ -14,6 +19,15 @@ export function logosEqual(
     if (srcA !== srcB) return false;
   }
   return true;
+}
+
+export function backgroundColorsEqual(
+  a: BackgroundColor | undefined,
+  b: BackgroundColor | undefined,
+): boolean {
+  if (a === b) return true;
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
 }
 
 export function normalizeSource(source: string | LogoSource): LogoSource {
