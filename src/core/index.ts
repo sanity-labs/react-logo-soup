@@ -19,6 +19,7 @@ export type {
   AlignmentMode,
   BackgroundColor,
   BoundingBox,
+  LogoFailure,
   LogoSoupEngine,
   LogoSoupState,
   LogoSource,

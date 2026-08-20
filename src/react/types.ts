@@ -2,6 +2,7 @@ import type { CSSProperties, ImgHTMLAttributes, ReactNode } from "react";
 import type {
   AlignmentMode,
   BackgroundColor,
+  LogoFailure,
   LogoSource,
   NormalizedLogo,
 } from "../core/types";
@@ -32,6 +33,8 @@ export type UseLogoSoupResult = {
   isReady: boolean;
   normalizedLogos: NormalizedLogo[];
   error: Error | null;
+  /** Logos that failed to load in the last run (absent from normalizedLogos) */
+  failures: LogoFailure[];
 };
 
 export type LogoSoupProps = {
@@ -49,4 +52,6 @@ export type LogoSoupProps = {
   className?: string;
   style?: CSSProperties;
   onNormalized?: (logos: NormalizedLogo[]) => void;
+  /** Called when one or more logos fail to load (including total failure) */
+  onError?: (failures: LogoFailure[]) => void;
 };

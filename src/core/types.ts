@@ -65,11 +65,19 @@ export type ProcessOptions = {
   backgroundColor?: BackgroundColor;
 };
 
+/** A logo that failed to load or measure during a processing run */
+export type LogoFailure = {
+  src: string;
+  error: Error;
+};
+
 /** Immutable state snapshot returned by the engine */
 export type LogoSoupState = {
   status: "idle" | "loading" | "ready" | "error";
   normalizedLogos: NormalizedLogo[];
   error: Error | null;
+  /** Per-logo failures from the last run; `error` is only set when all fail */
+  failures: LogoFailure[];
 };
 
 /** The imperative engine returned by `createLogoSoup()` */
