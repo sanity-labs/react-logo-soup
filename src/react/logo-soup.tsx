@@ -16,7 +16,8 @@ const logoImageStyle: CSSProperties = {
 };
 
 function DefaultImage(props: ImageRenderProps) {
-  return <img {...props} />;
+  // crossOrigin must match loadImage's, or browsers re-download every logo
+  return <img crossOrigin="anonymous" decoding="async" {...props} />;
 }
 
 export function LogoSoup({
@@ -54,8 +55,7 @@ export function LogoSoup({
     }
   }, [isReady, normalizedLogos, onNormalized]);
 
-  const halfGap =
-    typeof gap === "number" ? `${gap / 2}px` : `calc(${gap} / 2)`;
+  const halfGap = typeof gap === "number" ? `${gap / 2}px` : `calc(${gap} / 2)`;
 
   const containerStyle: CSSProperties = {
     textAlign: "center",
@@ -71,6 +71,7 @@ export function LogoSoup({
     <div
       className={className}
       style={containerStyle}
+      role="list"
       data-logo-soup-loading={isLoading}
     >
       {normalizedLogos.map((logo, index) => {
@@ -79,6 +80,7 @@ export function LogoSoup({
         return (
           <span
             key={`${logo.src}-${index}`}
+            role="listitem"
             style={{
               ...logoWrapperStyle,
               padding: halfGap,
