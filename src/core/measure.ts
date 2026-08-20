@@ -18,6 +18,9 @@ function createReusableCanvas(
     if (prevW !== w || prevH !== h) {
       canvas.width = w;
       canvas.height = h;
+      // Re-set after resize (resizing resets context state); high quality
+      // keeps hairline strokes through the downscale
+      ctx.imageSmoothingQuality = "high";
       prevW = w;
       prevH = h;
     } else {

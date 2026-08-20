@@ -121,6 +121,7 @@ describe("parity with scanPixels", () => {
       const { sw, sh } = downsampleDimensions(img.width, img.height);
       const canvas = createCanvas(sw, sh);
       const ctx = canvas.getContext("2d");
+      ctx.imageSmoothingQuality = "high";
       ctx.drawImage(img, 0, 0, sw, sh);
       const imageData = ctx.getImageData(0, 0, sw, sh);
       const data32 = new Uint32Array(imageData.data.buffer);

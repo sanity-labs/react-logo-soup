@@ -25,8 +25,12 @@ for (let i = 0; i < pixelCount; i++) {
   const g = (pixel >>> 8) & 0xff;
   const b = (pixel >>> 16) & 0xff;
 
-  // squared euclidean distance from background
-  const distSq = (r - bgR) ** 2 + (g - bgG) ** 2 + (b - bgB) ** 2;
+  // perceptually-weighted ("redmean") distance from background
+  const rMean = (r + bgR) >> 1;
+  const distSq =
+    (2 + rMean / 256) * (r - bgR) ** 2 +
+    4 * (g - bgG) ** 2 +
+    (2 + (255 - rMean) / 256) * (b - bgB) ** 2;
   if (distSq < contrastDistanceSq) continue;
 
   // recover x,y from flat index
@@ -62,12 +66,12 @@ If `process()` is called while a previous run is still loading images, the in-fl
 
 Every pull request automatically runs a benchmark suite against real SVG logos from the test set. Here are typical numbers from CI:
 
-| Benchmark | Time |
-|:----------|-----:|
-| Content detection (1 logo) | ~36us |
-| Render pass (20 logos) | ~1us |
+| Benchmark                           |   Time |
+| :---------------------------------- | -----: |
+| Content detection (1 logo)          |  ~36us |
+| Render pass (20 logos)              |   ~1us |
 | Full mount, no detection (20 logos) | ~3.5us |
-| Full mount, defaults (20 logos) | ~880us |
+| Full mount, defaults (20 logos)     | ~880us |
 
 Detection dominates the cost. Once measurements are cached, subsequent layout updates (changing `baseSize`, `scaleFactor`, or `alignBy`) are effectively free -- nearly 400x faster than a full mount.
 
@@ -75,12 +79,12 @@ Detection dominates the cost. Once measurements are cached, subsequent layout up
 
 The CI suite also measures how expensive individual features are relative to having them off:
 
-| Feature | On | Off | Cost |
-|:--------|---:|----:|:-----|
-| `densityAware` | ~35us | ~34us | Negligible (same pass) |
-| `alignBy: "visual-center-y"` vs `"bounds"` | ~1us | ~59ns | 18x (but both are sub-microsecond) |
-| `cropToContent` | ~2ms | ~0ns | 2ms (canvas crop + blob URL) |
-| Layout update: full mount vs cached | ~880us | ~2us | 400x (pixel scan vs pure math) |
+| Feature                                    |     On |   Off | Cost                               |
+| :----------------------------------------- | -----: | ----: | :--------------------------------- |
+| `densityAware`                             |  ~35us | ~34us | Negligible (same pass)             |
+| `alignBy: "visual-center-y"` vs `"bounds"` |   ~1us | ~59ns | 18x (but both are sub-microsecond) |
+| `cropToContent`                            |   ~2ms |  ~0ns | 2ms (canvas crop + blob URL)       |
+| Layout update: full mount vs cached        | ~880us |  ~2us | 400x (pixel scan vs pure math)     |
 
 ## CI regression detection
 
@@ -93,7 +97,8 @@ The benchmark suite uses [Welch's t-test](https://en.wikipedia.org/wiki/Welch%27
 This avoids false positives from measurement noise while catching real regressions. The comparison table and feature cost breakdown are posted directly on the PR as a comment, along with a link to the full CI job logs.
 
 <Tip>
-  You can run benchmarks locally with `bun run bench`. The suite uses `@napi-rs/canvas` and `@happy-dom/global-registrator` to run the same pixel scanning code outside a browser.
+  You can run benchmarks locally with `bun run bench`. The suite uses `@napi-rs/canvas` and
+  `@happy-dom/global-registrator` to run the same pixel scanning code outside a browser.
 </Tip>
 
 ## Tips for your application
@@ -106,10 +111,10 @@ When Logo Soup doesn't know the background color, it samples the image perimeter
 
 Each feature has a measurable cost. If you don't need density compensation, visual center alignment, or content cropping, turning them off saves work:
 
-| Feature | Effect when disabled |
-|:--------|:---------------------|
-| `densityAware: false` | Skips density computation during pixel scan |
-| `alignBy: "bounds"` | Skips visual center transform calculation |
+| Feature                | Effect when disabled                                      |
+| :--------------------- | :-------------------------------------------------------- |
+| `densityAware: false`  | Skips density computation during pixel scan               |
+| `alignBy: "bounds"`    | Skips visual center transform calculation                 |
 | `cropToContent: false` | Skips canvas crop and blob URL creation (saves ~2ms/logo) |
 
 ### Cache-friendly option changes

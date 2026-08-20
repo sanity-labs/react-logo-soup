@@ -182,7 +182,9 @@ export function scanPixels(options: ContentScanOptions): MeasurementResult {
   const scaleX = w / sw;
   const scaleY = h / sh;
 
-  const contrastDistanceSq = contrastThreshold * contrastThreshold * 3;
+  // ×9 not ×3: redmean weights sum to ~9 for neutral deltas, keeping
+  // contrastThreshold semantics unchanged
+  const contrastDistanceSq = contrastThreshold * contrastThreshold * 9;
 
   let bgR: number;
   let bgG: number;
@@ -243,11 +245,17 @@ export function scanPixels(options: ContentScanOptions): MeasurementResult {
       const dg = g - bgG;
       const db = b - bgB;
 
-      const distSq = dr * dr + dg * dg + db * db;
+      // Redmean perceptual distance: https://en.wikipedia.org/wiki/Color_difference
+      const rMean = (r + bgR) >> 1;
+      const distSq =
+        (2 + rMean / 256) * dr * dr +
+        4 * dg * dg +
+        (2 + (255 - rMean) / 256) * db * db;
       if (distSq < contrastDistanceSq) continue;
 
       weight = distSq * a;
-      opacity = Math.min(a, Math.sqrt(distSq));
+      // /3 normalizes redmean back to the plain-RGB opacity scale
+      opacity = Math.min(a, Math.sqrt(distSq / 3));
     }
 
     const x = i % sw;
