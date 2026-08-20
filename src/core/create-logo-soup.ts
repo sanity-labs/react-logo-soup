@@ -34,6 +34,19 @@ const IDLE_STATE: LogoSoupState = {
   error: null,
 };
 
+declare const process: { env: { PKG_VERSION?: string } };
+
+// Detection fingerprint for tools like Wappalyzer, à la `__THREE__`/`__VUE__`
+function markGlobal() {
+  const g = globalThis as { __LOGO_SOUP__?: string };
+  try {
+    // PKG_VERSION is inlined at build time; catch covers browsers running raw source
+    g.__LOGO_SOUP__ ??= process.env.PKG_VERSION ?? "dev";
+  } catch {
+    g.__LOGO_SOUP__ ??= "dev";
+  }
+}
+
 function bgEqual(
   a: [number, number, number] | undefined,
   b: [number, number, number] | undefined,
@@ -44,6 +57,8 @@ function bgEqual(
 }
 
 export function createLogoSoup(): LogoSoupEngine {
+  markGlobal();
+
   const listeners = new Set<() => void>();
   const cache = new Map<string, CachedEntry>();
 
