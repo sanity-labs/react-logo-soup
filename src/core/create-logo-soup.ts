@@ -226,11 +226,12 @@ export function createLogoSoup(): LogoSoupEngine {
     };
 
     if (!allCached) {
+      // Keep previous results so consumers don't flash empty on set changes
       setState({
         status: "loading",
-        normalizedLogos: [],
+        normalizedLogos: snapshot.normalizedLogos,
         error: null,
-        failures: NO_FAILURES,
+        failures: snapshot.failures,
       });
     }
 

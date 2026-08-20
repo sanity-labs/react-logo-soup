@@ -7,7 +7,6 @@ import { useLogoSoup } from "./use-logo-soup";
 const logoWrapperStyle: CSSProperties = {
   display: "inline-block",
   verticalAlign: "middle",
-  transition: "opacity 0.2s ease-in-out",
 };
 
 const logoImageStyle: CSSProperties = {
@@ -64,9 +63,12 @@ export function LogoSoup({
 
   const halfGap = typeof gap === "number" ? `${gap / 2}px` : `calc(${gap} / 2)`;
 
+  // Fade on the always-mounted container; per-item opacity never transitioned
   const containerStyle: CSSProperties = {
     textAlign: "center",
     textWrap: "balance",
+    opacity: isLoading && normalizedLogos.length === 0 ? 0 : 1,
+    transition: "opacity 0.2s ease-in-out",
     ...style,
   };
 
@@ -91,7 +93,6 @@ export function LogoSoup({
             style={{
               ...logoWrapperStyle,
               padding: halfGap,
-              opacity: isLoading ? 0 : 1,
             }}
           >
             <ImageComponent
