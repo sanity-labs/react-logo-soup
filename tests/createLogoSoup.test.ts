@@ -307,6 +307,30 @@ describe("createLogoSoup", () => {
     engine.destroy();
   });
 
+  test("keeps previous results visible while a new logo set loads", async () => {
+    installMockImage();
+    const engine = createLogoSoup();
+
+    engine.process({ logos: ["a.png"] });
+    await waitFor(() => {
+      expect(engine.getSnapshot().status).toBe("ready");
+    });
+    const previous = engine.getSnapshot().normalizedLogos;
+
+    engine.process({ logos: ["b.png"] });
+
+    // Synchronously in loading, but previous logos are still there
+    expect(engine.getSnapshot().status).toBe("loading");
+    expect(engine.getSnapshot().normalizedLogos).toBe(previous);
+
+    await waitFor(() => {
+      expect(engine.getSnapshot().status).toBe("ready");
+    });
+    expect(engine.getSnapshot().normalizedLogos[0]?.src).toBe("b.png");
+
+    engine.destroy();
+  });
+
   test("partial failure: reports failures but stays ready with the successes", async () => {
     globalThis.Image = class MockImage {
       crossOrigin = "";
