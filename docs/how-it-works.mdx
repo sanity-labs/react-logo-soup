@@ -18,7 +18,7 @@ Most logos have invisible padding, transparent borders, or solid-color backgroun
 ### Transparent vs opaque backgrounds
 
 - **Transparent logos** (PNGs/SVGs with alpha): pixels with alpha below the `contrastThreshold` are ignored. Content is everything with meaningful opacity.
-- **Opaque logos** (JPEGs, logos on solid backgrounds): the engine samples the image perimeter using a color histogram (quantized to 8-level buckets) to find the dominant background color. Pixels within `contrastThreshold` RGB distance of this color are treated as background.
+- **Opaque logos** (JPEGs, logos on solid backgrounds): the engine samples the image perimeter using a color histogram (quantized to 8-level buckets) to find the dominant background color. Pixels within `contrastThreshold` distance of this color are treated as background, using the perceptually-weighted ["redmean" color distance](https://en.wikipedia.org/wiki/Color_difference) rather than plain RGB Euclidean — green differences count more, blue less, matching human contrast perception.
 
 You can override the auto-detection by providing `backgroundColor` explicitly, which is recommended for opaque logos on known backgrounds.
 
@@ -38,11 +38,11 @@ normalizedWidth = aspectRatio ^ scaleFactor × baseSize
 
 The `scaleFactor` parameter controls the balance between width uniformity and height uniformity:
 
-| `scaleFactor` | Effect | Math |
-| --- | --- | --- |
-| `0` | All logos get the same width (`baseSize`) | `ratio^0 = 1`, so `width = baseSize` for all |
-| `1` | All logos get the same height (`baseSize`) | `ratio^1 × baseSize / ratio = baseSize` for all |
-| `0.5` | Balanced — neither too wide nor too tall | Square root dampens extreme ratios |
+| `scaleFactor` | Effect                                     | Math                                            |
+| ------------- | ------------------------------------------ | ----------------------------------------------- |
+| `0`           | All logos get the same width (`baseSize`)  | `ratio^0 = 1`, so `width = baseSize` for all    |
+| `1`           | All logos get the same height (`baseSize`) | `ratio^1 × baseSize / ratio = baseSize` for all |
+| `0.5`         | Balanced — neither too wide nor too tall   | Square root dampens extreme ratios              |
 
 The default `0.5` works well for most logo sets. It's the geometric mean between uniform-width and uniform-height, producing visually balanced results regardless of whether your set has more wide or tall logos.
 
@@ -63,6 +63,7 @@ pixelDensity = coverageRatio × averageOpacity
 ```
 
 Where:
+
 - `coverageRatio` = fraction of pixels within the content box that are classified as content
 - `averageOpacity` = average opacity of those content pixels (normalized 0–1)
 
@@ -104,10 +105,11 @@ Where `darkness = 1 - backgroundLuminance` and `density` is the logo's pixel den
 This is a subtle effect (typically 1–4% reduction), but it measurably improves visual balance in dark mode. It only applies to opaque images where the background luminance can be determined — transparent logos are unaffected.
 
 <Info>
-  References:
-  - [Helmholtz irradiation illusion (1860s)](https://en.wikipedia.org/wiki/Irradiation_illusion)
-  - [Jano Garcia's research compilation](https://gist.github.com/janogarcia/e9f57cd18ca85756743f81d9692764b7)
-  - [Adam Argyle: Adjust perceived typeface weight for dark mode](https://nerdy.dev/adjust-perceived-typepace-weight-for-dark-mode-without-layout-shift)
+  References: - [Helmholtz irradiation illusion
+  (1860s)](https://en.wikipedia.org/wiki/Irradiation_illusion) - [Jano Garcia's research
+  compilation](https://gist.github.com/janogarcia/e9f57cd18ca85756743f81d9692764b7) - [Adam Argyle:
+  Adjust perceived typeface weight for dark
+  mode](https://nerdy.dev/adjust-perceived-typepace-weight-for-dark-mode-without-layout-shift)
 </Info>
 
 ## 5. Visual Center Alignment

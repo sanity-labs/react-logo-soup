@@ -44,7 +44,11 @@ export async function measureImage(
 
   return (
     measureContent(
-      (sw, sh) => createCanvas(sw, sh).getContext("2d"),
+      (sw, sh) => {
+        const ctx = createCanvas(sw, sh).getContext("2d");
+        ctx.imageSmoothingQuality = "high";
+        return ctx;
+      },
       img,
       w,
       h,
