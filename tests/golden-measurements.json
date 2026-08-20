@@ -1,0 +1,1074 @@
+{
+  "aether.svg": {
+    "width": 360,
+    "height": 45,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 45
+    },
+    "visualCenter": {
+      "x": 189.026982051323,
+      "y": 23.046131525551147,
+      "offsetX": 9.026982051322989,
+      "offsetY": 0.5461315255511465
+    },
+    "pixelDensity": 0.2551259957107843
+  },
+  "athena.svg": {
+    "width": 422,
+    "height": 48,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 422,
+      "height": 48
+    },
+    "visualCenter": {
+      "x": 183.2018799894337,
+      "y": 28.468455948397555,
+      "offsetX": -27.798120010566294,
+      "offsetY": 4.468455948397555
+    },
+    "pixelDensity": 0.28776119402985073
+  },
+  "browser-comp.svg": {
+    "width": 274,
+    "height": 190,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 274,
+      "height": 190
+    },
+    "visualCenter": {
+      "x": 143.31622481573055,
+      "y": 99.0327885783026,
+      "offsetX": 6.31622481573055,
+      "offsetY": 4.0327885783026005
+    },
+    "pixelDensity": 0.09214921836180866
+  },
+  "burlington.svg": {
+    "width": 444,
+    "height": 100,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 444,
+      "height": 100
+    },
+    "visualCenter": {
+      "x": 187.74484477266918,
+      "y": 51.13061898646652,
+      "offsetX": -34.25515522733082,
+      "offsetY": 1.1306189864665228
+    },
+    "pixelDensity": 0.22641505725097055
+  },
+  "carhartt-wip.svg": {
+    "width": 360,
+    "height": 65,
+    "contentBox": {
+      "x": 30,
+      "y": 0,
+      "width": 300,
+      "height": 65
+    },
+    "visualCenter": {
+      "x": 175.56254977498548,
+      "y": 25.311028461685865,
+      "offsetX": -4.437450225014516,
+      "offsetY": -7.188971538314135
+    },
+    "pixelDensity": 0.28565067659234006
+  },
+  "clerk.svg": {
+    "width": 317,
+    "height": 92,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 317,
+      "height": 92
+    },
+    "visualCenter": {
+      "x": 144.3778524254012,
+      "y": 50.16773129334089,
+      "offsetX": -14.122147574598813,
+      "offsetY": 4.167731293340893
+    },
+    "pixelDensity": 0.34985410830999064
+  },
+  "coda.svg": {
+    "width": 247,
+    "height": 82,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 244,
+      "height": 82
+    },
+    "visualCenter": {
+      "x": 129.53153369194226,
+      "y": 49.114154727427476,
+      "offsetX": 7.531533691942258,
+      "offsetY": 8.114154727427476
+    },
+    "pixelDensity": 0.4816780755694783
+  },
+  "commerce-ui.svg": {
+    "width": 355,
+    "height": 78,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 355,
+      "height": 78
+    },
+    "visualCenter": {
+      "x": 141.22510181656784,
+      "y": 39.392183680738476,
+      "offsetX": -36.27489818343216,
+      "offsetY": 0.3921836807384764
+    },
+    "pixelDensity": 0.16937056609585416
+  },
+  "conductor.svg": {
+    "width": 360,
+    "height": 50,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 50
+    },
+    "visualCenter": {
+      "x": 169.31872542190783,
+      "y": 29.12301968079548,
+      "offsetX": -10.681274578092172,
+      "offsetY": 4.12301968079548
+    },
+    "pixelDensity": 0.32854432973967423
+  },
+  "cursor.svg": {
+    "width": 300,
+    "height": 71,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 300,
+      "height": 71
+    },
+    "visualCenter": {
+      "x": 128.49078239171064,
+      "y": 36.439245665129135,
+      "offsetX": -21.50921760828936,
+      "offsetY": 0.9392456651291354
+    },
+    "pixelDensity": 0.29681061085235655
+  },
+  "customer.io.svg": {
+    "width": 400,
+    "height": 54,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 397,
+      "height": 54
+    },
+    "visualCenter": {
+      "x": 179.11730238911298,
+      "y": 27.74873159818598,
+      "offsetX": -19.38269761088702,
+      "offsetY": 0.7487315981859801
+    },
+    "pixelDensity": 0.35456161249456386
+  },
+  "dbt.svg": {
+    "width": 248,
+    "height": 90,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 248,
+      "height": 90
+    },
+    "visualCenter": {
+      "x": 98.34873276896352,
+      "y": 46.89569812818749,
+      "offsetX": -25.651267231036485,
+      "offsetY": 1.8956981281874903
+    },
+    "pixelDensity": 0.4241316872427983
+  },
+  "dom-perignon.svg": {
+    "width": 426,
+    "height": 100,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 426,
+      "height": 100
+    },
+    "visualCenter": {
+      "x": 208.3444155136037,
+      "y": 49.30442563671588,
+      "offsetX": -4.655584486396293,
+      "offsetY": -0.6955743632841234
+    },
+    "pixelDensity": 0.1898338220918866
+  },
+  "elemeno-health.svg": {
+    "width": 369,
+    "height": 89,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 369,
+      "height": 89
+    },
+    "visualCenter": {
+      "x": 120.32305964782137,
+      "y": 40.56715405187562,
+      "offsetX": -64.17694035217863,
+      "offsetY": -3.932845948124381
+    },
+    "pixelDensity": 0.38573781291172593
+  },
+  "eurostar.svg": {
+    "width": 391,
+    "height": 90,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 391,
+      "height": 90
+    },
+    "visualCenter": {
+      "x": 189.524557276007,
+      "y": 45.29840568945479,
+      "offsetX": -5.975442723993012,
+      "offsetY": 0.29840568945478907
+    },
+    "pixelDensity": 0.19613532066598402
+  },
+  "expedia.svg": {
+    "width": 300,
+    "height": 67,
+    "contentBox": {
+      "x": 0,
+      "y": 6,
+      "width": 300,
+      "height": 61
+    },
+    "visualCenter": {
+      "x": 123.65001176731147,
+      "y": 36.61915922637812,
+      "offsetX": -26.34998823268853,
+      "offsetY": 0.11915922637812315
+    },
+    "pixelDensity": 0.3328474372205022
+  },
+  "fanduel.svg": {
+    "width": 316,
+    "height": 68,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 316,
+      "height": 68
+    },
+    "visualCenter": {
+      "x": 142.3369381909938,
+      "y": 32.43244479888469,
+      "offsetX": -15.663061809006194,
+      "offsetY": -1.5675552011153115
+    },
+    "pixelDensity": 0.3080756111968597
+  },
+  "fnatic.svg": {
+    "width": 390,
+    "height": 57,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 57
+    },
+    "visualCenter": {
+      "x": 198.85670745352914,
+      "y": 24.99856854171755,
+      "offsetX": 3.8567074535291397,
+      "offsetY": -3.5014314582824504
+    },
+    "pixelDensity": 0.4471526596680547
+  },
+  "frame.svg": {
+    "width": 400,
+    "height": 57,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 400,
+      "height": 57
+    },
+    "visualCenter": {
+      "x": 198.08404000536675,
+      "y": 30.130776104338246,
+      "offsetX": -1.9159599946332548,
+      "offsetY": 1.6307761043382456
+    },
+    "pixelDensity": 0.2470088427527874
+  },
+  "frontier.svg": {
+    "width": 325,
+    "height": 44,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 325,
+      "height": 44
+    },
+    "visualCenter": {
+      "x": 164.12134893395546,
+      "y": 20.17719967159966,
+      "offsetX": 1.6213489339554599,
+      "offsetY": -1.8228003284003407
+    },
+    "pixelDensity": 0.5786517380744742
+  },
+  "gaga.svg": {
+    "width": 350,
+    "height": 148,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 350,
+      "height": 148
+    },
+    "visualCenter": {
+      "x": 177.70293704785337,
+      "y": 77.54900735072194,
+      "offsetX": 2.702937047853368,
+      "offsetY": 3.5490073507219364
+    },
+    "pixelDensity": 0.46494156283202936
+  },
+  "gala-games.svg": {
+    "width": 347,
+    "height": 104,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 347,
+      "height": 104
+    },
+    "visualCenter": {
+      "x": 156.41988534379914,
+      "y": 52.91753526803922,
+      "offsetX": -17.080114656200863,
+      "offsetY": 0.9175352680392166
+    },
+    "pixelDensity": 0.21319347980155917
+  },
+  "gfinity.svg": {
+    "width": 360,
+    "height": 100,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 356,
+      "height": 100
+    },
+    "visualCenter": {
+      "x": 174.4097529162075,
+      "y": 51.325974520777535,
+      "offsetX": -3.590247083792491,
+      "offsetY": 1.3259745207775353
+    },
+    "pixelDensity": 0.4610688196847367
+  },
+  "good-american.svg": {
+    "width": 360,
+    "height": 23,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 23
+    },
+    "visualCenter": {
+      "x": 182.8614719666688,
+      "y": 11.07510948606449,
+      "offsetX": 2.8614719666688018,
+      "offsetY": -0.4248905139355106
+    },
+    "pixelDensity": 0.3119190591421942
+  },
+  "hinge.svg": {
+    "width": 332,
+    "height": 126,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 332,
+      "height": 126
+    },
+    "visualCenter": {
+      "x": 163.1940113871122,
+      "y": 58.690111740097265,
+      "offsetX": -2.805988612887802,
+      "offsetY": -4.309888259902735
+    },
+    "pixelDensity": 0.3444457234948774
+  },
+  "hipp.svg": {
+    "width": 249,
+    "height": 76,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 249,
+      "height": 76
+    },
+    "visualCenter": {
+      "x": 116.12878663740631,
+      "y": 37.34600155123432,
+      "offsetX": -8.371213362593693,
+      "offsetY": -0.6539984487656767
+    },
+    "pixelDensity": 0.7053256814921091
+  },
+  "hunter-douglas.svg": {
+    "width": 241,
+    "height": 36,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 241,
+      "height": 36
+    },
+    "visualCenter": {
+      "x": 127.23145034566237,
+      "y": 18.815610065813107,
+      "offsetX": 6.731450345662367,
+      "offsetY": 0.8156100658131074
+    },
+    "pixelDensity": 0.3599010242608858
+  },
+  "kahoot.svg": {
+    "width": 294,
+    "height": 100,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 291,
+      "height": 100
+    },
+    "visualCenter": {
+      "x": 133.87506006634686,
+      "y": 53.47191342193553,
+      "offsetX": -11.624939933653138,
+      "offsetY": 3.4719134219355325
+    },
+    "pixelDensity": 0.36863920393332156
+  },
+  "keystone.svg": {
+    "width": 400,
+    "height": 80,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 400,
+      "height": 80
+    },
+    "visualCenter": {
+      "x": 173.40896731590905,
+      "y": 33.47131578819071,
+      "offsetX": -26.591032684090948,
+      "offsetY": -6.528684211809292
+    },
+    "pixelDensity": 0.2889885459134149
+  },
+  "lift-foil.svg": {
+    "width": 319,
+    "height": 155,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 319,
+      "height": 155
+    },
+    "visualCenter": {
+      "x": 151.17241073477095,
+      "y": 89.74674061915692,
+      "offsetX": -8.32758926522905,
+      "offsetY": 12.246740619156924
+    },
+    "pixelDensity": 0.14032239819004524
+  },
+  "loveholidays.svg": {
+    "width": 357,
+    "height": 58,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 357,
+      "height": 58
+    },
+    "visualCenter": {
+      "x": 187.0937689778884,
+      "y": 33.30009707338221,
+      "offsetX": 8.593768977888402,
+      "offsetY": 4.3000970733822115
+    },
+    "pixelDensity": 0.2393965919701214
+  },
+  "lvmh.svg": {
+    "width": 311,
+    "height": 74,
+    "contentBox": {
+      "x": 3,
+      "y": 0,
+      "width": 305,
+      "height": 74
+    },
+    "visualCenter": {
+      "x": 166.3731224598174,
+      "y": 33.493026940424805,
+      "offsetX": 10.87312245981741,
+      "offsetY": -3.506973059575195
+    },
+    "pixelDensity": 0.25318407083112965
+  },
+  "mejuri.svg": {
+    "width": 360,
+    "height": 65,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 65
+    },
+    "visualCenter": {
+      "x": 173.3401249954093,
+      "y": 29.50666532752893,
+      "offsetX": -6.6598750045907025,
+      "offsetY": -2.9933346724710717
+    },
+    "pixelDensity": 0.23186829084806573
+  },
+  "metacore.svg": {
+    "width": 276,
+    "height": 126,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 276,
+      "height": 126
+    },
+    "visualCenter": {
+      "x": 137.78389110363108,
+      "y": 67.96081532772929,
+      "offsetX": -0.2161088963689224,
+      "offsetY": 4.960815327729293
+    },
+    "pixelDensity": 0.2565181681724206
+  },
+  "mr-marvis.svg": {
+    "width": 260,
+    "height": 32,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 260,
+      "height": 32
+    },
+    "visualCenter": {
+      "x": 129.83141933515793,
+      "y": 15.933238174433058,
+      "offsetX": -0.16858066484206802,
+      "offsetY": -0.06676182556694243
+    },
+    "pixelDensity": 0.21219790241678066
+  },
+  "new-day.svg": {
+    "width": 337,
+    "height": 102,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 337,
+      "height": 102
+    },
+    "visualCenter": {
+      "x": 169.78246809419488,
+      "y": 47.14586392979168,
+      "offsetX": 1.2824680941948827,
+      "offsetY": -3.8541360702083196
+    },
+    "pixelDensity": 0.14265327594452415
+  },
+  "nordstrom.svg": {
+    "width": 383,
+    "height": 48,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 383,
+      "height": 48
+    },
+    "visualCenter": {
+      "x": 191.82740439278436,
+      "y": 23.38720629584509,
+      "offsetX": 0.3274043927843593,
+      "offsetY": -0.6127937041549103
+    },
+    "pixelDensity": 0.37670611213235294
+  },
+  "nour-hammour.svg": {
+    "width": 146,
+    "height": 120,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 146,
+      "height": 120
+    },
+    "visualCenter": {
+      "x": 73.31120068041358,
+      "y": 60.05670471827534,
+      "offsetX": 0.3112006804135774,
+      "offsetY": 0.05670471827534129
+    },
+    "pixelDensity": 0.30442467718794836
+  },
+  "paytronix.svg": {
+    "width": 400,
+    "height": 96,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 400,
+      "height": 96
+    },
+    "visualCenter": {
+      "x": 185.0222938340169,
+      "y": 48.40493069525362,
+      "offsetX": -14.977706165983108,
+      "offsetY": 0.40493069525361847
+    },
+    "pixelDensity": 0.30551422149887625
+  },
+  "pinecone.svg": {
+    "width": 434,
+    "height": 90,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 434,
+      "height": 90
+    },
+    "visualCenter": {
+      "x": 208.72384631854862,
+      "y": 56.697198818516874,
+      "offsetX": -8.276153681451376,
+      "offsetY": 11.697198818516874
+    },
+    "pixelDensity": 0.2239028944911298
+  },
+  "poc.svg": {
+    "width": 249,
+    "height": 86,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 249,
+      "height": 86
+    },
+    "visualCenter": {
+      "x": 115.58084131791713,
+      "y": 36.94238489193733,
+      "offsetX": -8.919158682082866,
+      "offsetY": -6.05761510806267
+    },
+    "pixelDensity": 0.47031849776947815
+  },
+  "powerhouse.svg": {
+    "width": 326,
+    "height": 50,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 326,
+      "height": 50
+    },
+    "visualCenter": {
+      "x": 162.35067722264847,
+      "y": 24.46633932474741,
+      "offsetX": -0.6493227773515287,
+      "offsetY": -0.533660675252591
+    },
+    "pixelDensity": 0.7711798512508451
+  },
+  "primary-bid.svg": {
+    "width": 397,
+    "height": 70,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 397,
+      "height": 70
+    },
+    "visualCenter": {
+      "x": 203.97982018647596,
+      "y": 31.127664315633147,
+      "offsetX": 5.479820186475962,
+      "offsetY": -3.8723356843668526
+    },
+    "pixelDensity": 0.37706876122768795
+  },
+  "rad-power-bikes.svg": {
+    "width": 427,
+    "height": 33,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 427,
+      "height": 31
+    },
+    "visualCenter": {
+      "x": 209.73229919808753,
+      "y": 14.914457202272956,
+      "offsetX": -3.7677008019124685,
+      "offsetY": -0.5855427977270438
+    },
+    "pixelDensity": 0.4456473796062392
+  },
+  "redis.svg": {
+    "width": 170,
+    "height": 54,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 170,
+      "height": 54
+    },
+    "visualCenter": {
+      "x": 81.50495516625169,
+      "y": 31.700519579147368,
+      "offsetX": -3.4950448337483095,
+      "offsetY": 4.700519579147368
+    },
+    "pixelDensity": 0.48697209653092
+  },
+  "reforge.svg": {
+    "width": 420,
+    "height": 100,
+    "contentBox": {
+      "x": 0,
+      "y": 13,
+      "width": 420,
+      "height": 87
+    },
+    "visualCenter": {
+      "x": 215.5310756554225,
+      "y": 55.09755697273255,
+      "offsetX": 5.531075655422512,
+      "offsetY": -1.4024430272674522
+    },
+    "pixelDensity": 0.2746962282366257
+  },
+  "render.svg": {
+    "width": 347,
+    "height": 66,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 347,
+      "height": 66
+    },
+    "visualCenter": {
+      "x": 155.57536114306885,
+      "y": 39.359989841827,
+      "offsetX": -17.924638856931153,
+      "offsetY": 6.3599898418270016
+    },
+    "pixelDensity": 0.31385746606334847
+  },
+  "replit.svg": {
+    "width": 288,
+    "height": 66,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 288,
+      "height": 66
+    },
+    "visualCenter": {
+      "x": 126.814269114566,
+      "y": 32.58477081200536,
+      "offsetX": -17.185730885433998,
+      "offsetY": -0.41522918799464037
+    },
+    "pixelDensity": 0.27854395346655403
+  },
+  "retool.svg": {
+    "width": 321,
+    "height": 63,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 321,
+      "height": 63
+    },
+    "visualCenter": {
+      "x": 156.14324128863677,
+      "y": 32.417957011949206,
+      "offsetX": -4.356758711363227,
+      "offsetY": 0.9179570119492055
+    },
+    "pixelDensity": 0.3732814302191465
+  },
+  "rich-brilliant-lighting.svg": {
+    "width": 146,
+    "height": 168,
+    "contentBox": {
+      "x": 0,
+      "y": 13,
+      "width": 140,
+      "height": 152
+    },
+    "visualCenter": {
+      "x": 72.47852208611627,
+      "y": 86.70925768170163,
+      "offsetX": 2.4785220861162713,
+      "offsetY": -2.2907423182983706
+    },
+    "pixelDensity": 0.1617357397504456
+  },
+  "rikstv.svg": {
+    "width": 335,
+    "height": 91,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 335,
+      "height": 91
+    },
+    "visualCenter": {
+      "x": 152.7595561623114,
+      "y": 46.1413989811439,
+      "offsetX": -14.740443837688588,
+      "offsetY": 0.6413989811439009
+    },
+    "pixelDensity": 0.4322646683194351
+  },
+  "rona.svg": {
+    "width": 155,
+    "height": 32,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 155,
+      "height": 32
+    },
+    "visualCenter": {
+      "x": 70.78756213375198,
+      "y": 16.151731645848244,
+      "offsetX": -6.712437866248024,
+      "offsetY": 0.15173164584824406
+    },
+    "pixelDensity": 0.6537796451914099
+  },
+  "samsung.svg": {
+    "width": 325,
+    "height": 50,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 325,
+      "height": 50
+    },
+    "visualCenter": {
+      "x": 164.21841217489452,
+      "y": 25.022556406300126,
+      "offsetX": 1.7184121748945245,
+      "offsetY": 0.022556406300125786
+    },
+    "pixelDensity": 0.5340248176565312
+  },
+  "scalapay.svg": {
+    "width": 378,
+    "height": 72,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 378,
+      "height": 72
+    },
+    "visualCenter": {
+      "x": 188.0048834464208,
+      "y": 35.92535655317388,
+      "offsetX": -0.9951165535792086,
+      "offsetY": -0.07464344682612278
+    },
+    "pixelDensity": 0.28677413273001506
+  },
+  "siemens.svg": {
+    "width": 321,
+    "height": 52,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 321,
+      "height": 52
+    },
+    "visualCenter": {
+      "x": 160.53017016562669,
+      "y": 25.971185123142405,
+      "offsetX": 0.03017016562668573,
+      "offsetY": -0.028814876857595095
+    },
+    "pixelDensity": 0.5563667133520075
+  },
+  "spanx.svg": {
+    "width": 197,
+    "height": 32,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 197,
+      "height": 32
+    },
+    "visualCenter": {
+      "x": 92.15391034342383,
+      "y": 15.553932087457543,
+      "offsetX": -6.346089656576169,
+      "offsetY": -0.4460679125424569
+    },
+    "pixelDensity": 0.36064425770308123
+  },
+  "stereolabs.svg": {
+    "width": 372,
+    "height": 50,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 372,
+      "height": 50
+    },
+    "visualCenter": {
+      "x": 178.7494158961022,
+      "y": 29.462402455916617,
+      "offsetX": -7.250584103897808,
+      "offsetY": 4.462402455916617
+    },
+    "pixelDensity": 0.3624103299856528
+  },
+  "summersalt.svg": {
+    "width": 409,
+    "height": 36,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 409,
+      "height": 36
+    },
+    "visualCenter": {
+      "x": 187.00640270455446,
+      "y": 17.531310198212445,
+      "offsetX": -17.49359729544554,
+      "offsetY": -0.4686898017875549
+    },
+    "pixelDensity": 0.38898254123167614
+  },
+  "supreme.svg": {
+    "width": 332,
+    "height": 100,
+    "contentBox": {
+      "x": 48,
+      "y": 32,
+      "width": 252,
+      "height": 28
+    },
+    "visualCenter": {
+      "x": 188.44660684948818,
+      "y": 47.49222797927461,
+      "offsetX": 14.446606849488177,
+      "offsetY": 1.4922279792746096
+    },
+    "backgroundLuminance": 0.043137254901960784,
+    "pixelDensity": 0.00029818378964489026
+  },
+  "too-good-to-go.svg": {
+    "width": 250,
+    "height": 200,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 250,
+      "height": 200
+    },
+    "visualCenter": {
+      "x": 127.89160940661834,
+      "y": 105.7950322480456,
+      "offsetX": 2.8916094066183433,
+      "offsetY": 5.795032248045601
+    },
+    "pixelDensity": 0.1702864282968089
+  },
+  "tula.svg": {
+    "width": 226,
+    "height": 96,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 226,
+      "height": 96
+    },
+    "visualCenter": {
+      "x": 115.93224073111956,
+      "y": 43.70902646107818,
+      "offsetX": 2.9322407311195633,
+      "offsetY": -4.290973538921818
+    },
+    "pixelDensity": 0.20973434851201853
+  },
+  "unity.svg": {
+    "width": 305,
+    "height": 112,
+    "contentBox": {
+      "x": 0,
+      "y": 0,
+      "width": 305,
+      "height": 112
+    },
+    "visualCenter": {
+      "x": 120.08905958250817,
+      "y": 56.01698769082966,
+      "offsetX": -32.41094041749183,
+      "offsetY": 0.016987690829658675
+    },
+    "pixelDensity": 0.3208346647300896
+  },
+  "wetransfer.svg": {
+    "width": 371,
+    "height": 55,
+    "contentBox": {
+      "x": 3,
+      "y": 0,
+      "width": 368,
+      "height": 55
+    },
+    "visualCenter": {
+      "x": 186.33591308689458,
+      "y": 30.30476787645312,
+      "offsetX": -0.6640869131054217,
+      "offsetY": 2.80476787645312
+    },
+    "pixelDensity": 0.4623921765790278
+  }
+}
