@@ -1,6 +1,6 @@
 import { createSubscriber } from "svelte/reactivity";
 import { createLogoSoup as createEngine } from "../core/create-logo-soup";
-import type { ProcessOptions, LogoSoupState } from "../core/types";
+import type { LogoSoupState, ProcessOptions } from "../core/types";
 
 export function createLogoSoup() {
   const engine = createEngine();

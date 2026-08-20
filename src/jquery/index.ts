@@ -1,7 +1,7 @@
 import { install } from "./plugin";
 
-export { install };
 export type { LogoSoupPluginOptions } from "./plugin";
+export { install };
 
 // Auto-install if jQuery is available globally
 if (typeof window !== "undefined" && (window as any).jQuery) {

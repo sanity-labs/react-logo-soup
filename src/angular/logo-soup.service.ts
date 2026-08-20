@@ -1,6 +1,6 @@
-import { Injectable, signal, inject, DestroyRef } from "@angular/core";
+import { DestroyRef, Injectable, inject, signal } from "@angular/core";
 import { createLogoSoup as createEngine } from "../core/create-logo-soup";
-import type { ProcessOptions, LogoSoupState } from "../core/types";
+import type { LogoSoupState, ProcessOptions } from "../core/types";
 
 const IDLE_STATE: LogoSoupState = {
   status: "idle",

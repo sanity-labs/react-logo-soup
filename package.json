@@ -96,6 +96,8 @@
     "generate:logos": "bun scripts/generate-test-logos.ts",
     "prepublishOnly": "bun run build",
     "test": "NODE_ENV=development bun test",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
     "bench": "bun tests/bench/run.ts",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
@@ -125,6 +127,7 @@
   "license": "MIT",
   "devDependencies": {
     "@angular/core": "^19",
+    "@biomejs/biome": "^2.5.9",
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.30.0",
     "@chromatic-com/storybook": "^5.0.1",

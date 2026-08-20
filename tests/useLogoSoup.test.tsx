@@ -1,6 +1,6 @@
-import { describe, test, expect } from "bun:test";
-import { StrictMode, type ReactNode } from "react";
+import { describe, expect, test } from "bun:test";
 import { renderHook, waitFor } from "@testing-library/react";
+import { type ReactNode, StrictMode } from "react";
 import { useLogoSoup } from "../src/react/use-logo-soup";
 
 const originalImage = globalThis.Image;

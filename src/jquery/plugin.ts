@@ -1,9 +1,8 @@
+import { DEFAULT_ALIGN_BY, DEFAULT_GAP } from "../core/constants";
 import { createLogoSoup as createEngine } from "../core/create-logo-soup";
 import { getVisualCenterTransform } from "../core/get-visual-center-transform";
-import { DEFAULT_ALIGN_BY, DEFAULT_GAP } from "../core/constants";
 import type {
   AlignmentMode,
-  LogoSource,
   NormalizedLogo,
   ProcessOptions,
 } from "../core/types";
