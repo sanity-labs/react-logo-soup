@@ -46,6 +46,9 @@ function render(
     wrapper.style.transition = "opacity 0.2s ease-in-out";
 
     const img = document.createElement("img");
+    // Must match loadImage's CORS mode, or browsers re-download every logo
+    img.crossOrigin = "anonymous";
+    img.decoding = "async";
     img.src = logo.croppedSrc || logo.src;
     img.alt = logo.alt;
     img.width = logo.normalizedWidth;
