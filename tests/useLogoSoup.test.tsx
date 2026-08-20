@@ -268,6 +268,56 @@ describe("useLogoSoup", () => {
     globalThis.Image = originalImage;
   });
 
+  test("full measurements coverage is ready on the very first render", () => {
+    globalThis.Image = class MockImage {
+      constructor() {
+        throw new Error("Image should not be constructed when precomputed");
+      }
+    } as unknown as typeof Image;
+
+    const { result } = renderHook(() =>
+      useLogoSoup({
+        logos: ["https://example.com/logo.png"],
+        measurements: {
+          "https://example.com/logo.png": { width: 200, height: 100 },
+        },
+        densityAware: false,
+      }),
+    );
+
+    expect(result.current.isReady).toBe(true);
+    expect(result.current.normalizedLogos).toHaveLength(1);
+    expect(result.current.normalizedLogos[0]?.normalizedWidth).toBeGreaterThan(
+      0,
+    );
+
+    globalThis.Image = originalImage;
+  });
+
+  test("inline measurements object keeps results referentially stable", () => {
+    globalThis.Image = class MockImage {
+      constructor() {
+        throw new Error("Image should not be constructed when precomputed");
+      }
+    } as unknown as typeof Image;
+
+    const measurement = { width: 200, height: 100 };
+    const { result, rerender } = renderHook(() =>
+      useLogoSoup({
+        logos: ["https://example.com/logo.png"],
+        // New wrapper object every render — must not produce new results
+        measurements: { "https://example.com/logo.png": measurement },
+      }),
+    );
+
+    const first = result.current.normalizedLogos;
+    rerender();
+
+    expect(result.current.normalizedLogos).toBe(first);
+
+    globalThis.Image = originalImage;
+  });
+
   test("works correctly under React StrictMode (not stuck in loading)", async () => {
     globalThis.Image = class MockImage {
       crossOrigin = "";

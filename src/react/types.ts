@@ -4,6 +4,7 @@ import type {
   BackgroundColor,
   LogoFailure,
   LogoSource,
+  MeasurementResult,
   NormalizedLogo,
 } from "../core/types";
 
@@ -19,6 +20,8 @@ export type RenderImageFn = (props: ImageRenderProps) => ReactNode;
 
 export type UseLogoSoupOptions = {
   logos: (string | LogoSource)[];
+  /** Pre-computed measurements keyed by src (e.g. from the Node adapter). Full coverage renders synchronously — SSR-safe, zero CLS */
+  measurements?: Record<string, MeasurementResult>;
   baseSize?: number;
   scaleFactor?: number;
   contrastThreshold?: number;
@@ -39,6 +42,8 @@ export type UseLogoSoupResult = {
 
 export type LogoSoupProps = {
   logos: (string | LogoSource)[];
+  /** Pre-computed measurements keyed by src (e.g. from the Node adapter). Full coverage renders synchronously — SSR-safe, zero CLS */
+  measurements?: Record<string, MeasurementResult>;
   baseSize?: number;
   scaleFactor?: number;
   contrastThreshold?: number;

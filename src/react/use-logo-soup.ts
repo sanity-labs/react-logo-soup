@@ -1,7 +1,20 @@
-import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useSyncExternalStore,
+} from "react";
 import { createLogoSoup } from "../core/create-logo-soup";
-import { backgroundColorsEqual, logosEqual } from "../core/normalize";
-import type { LogoSoupState } from "../core/types";
+import {
+  backgroundColorsEqual,
+  createNormalizedLogo,
+  logosEqual,
+  measurementsEqual,
+  normalizeSource,
+  resolveDensityFactor,
+} from "../core/normalize";
+import type { LogoSoupState, NormalizedLogo } from "../core/types";
 import type { UseLogoSoupOptions, UseLogoSoupResult } from "./types";
 
 const SERVER_SNAPSHOT: LogoSoupState = {
@@ -41,13 +54,18 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
   );
   const getSnapshot = useCallback(() => engine.getSnapshot(), [engine]);
 
-  const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const storeState = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
 
   const stableLogos = useStableValue(options.logos, logosEqual);
   const backgroundColor = useStableValue(
     options.backgroundColor,
     backgroundColorsEqual,
   );
+  const measurements = useStableValue(options.measurements, measurementsEqual);
 
   const {
     baseSize,
@@ -57,6 +75,47 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
     densityFactor,
     cropToContent,
   } = options;
+
+  // When measurements cover every logo, the ready state is pure math — no
+  // canvas, no network. Computed in render so SSR emits final HTML (zero CLS)
+  const precomputedState = useMemo((): LogoSoupState | null => {
+    if (!measurements || cropToContent) return null;
+    const effectiveDensityFactor = resolveDensityFactor(
+      densityAware,
+      densityFactor,
+    );
+    const results: NormalizedLogo[] = [];
+    for (const logo of stableLogos) {
+      const source = normalizeSource(logo);
+      const measurement = measurements[source.src];
+      if (!measurement) return null;
+      results.push(
+        createNormalizedLogo(
+          source,
+          measurement,
+          baseSize,
+          scaleFactor,
+          effectiveDensityFactor,
+        ),
+      );
+    }
+    return {
+      status: "ready",
+      normalizedLogos: results,
+      error: null,
+      failures: [],
+    };
+  }, [
+    stableLogos,
+    measurements,
+    baseSize,
+    scaleFactor,
+    densityAware,
+    densityFactor,
+    cropToContent,
+  ]);
+
+  const state = precomputedState ?? storeState;
 
   // Holds a deferred destroy timer so that StrictMode remounts can cancel it
   // before it fires. On a real unmount no remount follows and the timer
@@ -72,6 +131,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
 
     engine.process({
       logos: stableLogos,
+      measurements,
       baseSize,
       scaleFactor,
       contrastThreshold,
@@ -88,6 +148,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
   }, [
     engine,
     stableLogos,
+    measurements,
     baseSize,
     scaleFactor,
     contrastThreshold,

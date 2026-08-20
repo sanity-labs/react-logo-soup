@@ -12,7 +12,11 @@ import {
   measureWithContentDetection,
   resolveBackgroundColor,
 } from "./measure";
-import { createNormalizedLogo, normalizeSource } from "./normalize";
+import {
+  createNormalizedLogo,
+  normalizeSource,
+  resolveDensityFactor,
+} from "./normalize";
 import type {
   LogoFailure,
   LogoSoupEngine,
@@ -24,7 +28,7 @@ import type {
 } from "./types";
 
 interface CachedEntry {
-  img: HTMLImageElement;
+  img?: HTMLImageElement;
   measurement: MeasurementResult;
   blobUrl?: string;
 }
@@ -129,6 +133,7 @@ export function createLogoSoup(): LogoSoupEngine {
 
     const {
       logos,
+      measurements,
       baseSize = DEFAULT_BASE_SIZE,
       scaleFactor = DEFAULT_SCALE_FACTOR,
       contrastThreshold = DEFAULT_CONTRAST_THRESHOLD,
@@ -169,6 +174,15 @@ export function createLogoSoup(): LogoSoupEngine {
     const activeSrcs = new Set(sources.map((s) => s.src));
     pruneCache(activeSrcs);
 
+    if (measurements) {
+      for (const source of sources) {
+        const measurement = measurements[source.src];
+        if (measurement && !cache.has(source.src)) {
+          cache.set(source.src, { measurement });
+        }
+      }
+    }
+
     const allCached = sources.every((s) => cache.has(s.src));
     const needsCrop =
       cropToContent &&
@@ -177,7 +191,10 @@ export function createLogoSoup(): LogoSoupEngine {
         return entry && !entry.blobUrl && entry.measurement.contentBox;
       });
 
-    const effectiveDensityFactor = densityAware ? densityFactor : 0;
+    const effectiveDensityFactor = resolveDensityFactor(
+      densityAware,
+      densityFactor,
+    );
 
     const processKey = JSON.stringify([
       sources.map((s) => [s.src, s.alt ?? ""]),
@@ -262,6 +279,10 @@ export function createLogoSoup(): LogoSoupEngine {
         );
 
         if (cropToContent && entry.measurement.contentBox && !entry.blobUrl) {
+          if (!entry.img) {
+            entry.img = await loadImage(source.src);
+            if (cancelled) throw new Error("cancelled");
+          }
           const url = await cropToBlobUrl(
             entry.img,
             entry.measurement.contentBox,

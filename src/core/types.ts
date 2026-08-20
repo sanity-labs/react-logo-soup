@@ -56,6 +56,8 @@ export type MeasurementResult = {
 /** Options passed to `engine.process()` */
 export type ProcessOptions = {
   logos: (string | LogoSource)[];
+  /** Pre-computed measurements keyed by src (e.g. from the Node adapter); seeds the cache and skips load + pixel scan */
+  measurements?: Record<string, MeasurementResult>;
   baseSize?: number;
   scaleFactor?: number;
   contrastThreshold?: number;
