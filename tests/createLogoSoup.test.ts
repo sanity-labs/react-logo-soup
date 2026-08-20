@@ -61,6 +61,16 @@ describe("createLogoSoup", () => {
     engine.destroy();
   });
 
+  test("sets the __LOGO_SOUP__ detection global", () => {
+    const engine = createLogoSoup();
+
+    expect(
+      (globalThis as { __LOGO_SOUP__?: string }).__LOGO_SOUP__,
+    ).toBeString();
+
+    engine.destroy();
+  });
+
   test("getSnapshot returns stable reference when state has not changed", () => {
     const engine = createLogoSoup();
     const a = engine.getSnapshot();
