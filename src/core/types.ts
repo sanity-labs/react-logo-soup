@@ -65,6 +65,8 @@ export type ProcessOptions = {
   densityFactor?: number;
   cropToContent?: boolean;
   backgroundColor?: BackgroundColor;
+  /** Layout gap between logos; numeric values feed density compensation (wider gaps isolate logos perceptually) */
+  gap?: number | string;
 };
 
 /** A logo that failed to load or measure during a processing run */

@@ -74,6 +74,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
     densityAware,
     densityFactor,
     cropToContent,
+    gap,
   } = options;
 
   // When measurements cover every logo, the ready state is pure math — no
@@ -83,6 +84,8 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
     const effectiveDensityFactor = resolveDensityFactor(
       densityAware,
       densityFactor,
+      gap,
+      baseSize,
     );
     const results: NormalizedLogo[] = [];
     for (const logo of stableLogos) {
@@ -113,6 +116,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
     densityAware,
     densityFactor,
     cropToContent,
+    gap,
   ]);
 
   const state = precomputedState ?? storeState;
@@ -139,6 +143,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
       densityFactor,
       cropToContent,
       backgroundColor,
+      gap,
     });
 
     return () => {
@@ -156,6 +161,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupResult {
     densityFactor,
     cropToContent,
     backgroundColor,
+    gap,
   ]);
 
   return {

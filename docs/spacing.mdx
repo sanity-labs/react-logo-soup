@@ -1,0 +1,56 @@
+---
+title: Spacing & Perception
+description: Why gaps between logos change how balanced they look, and how Logo Soup compensates automatically.
+---
+
+Two logo walls with identical, pixel-balanced sizes can look completely different depending on one thing: the space between the logos. Tight rows read as balanced; spread the same logos out and some suddenly look too big, others too small.
+
+This isn't a bug in the balancing — it's how human vision works.
+
+## The perception problem
+
+When logos sit close together, your eye judges each one **relative to its neighbors**. Vision research calls this size contrast: the perceived size of an item depends on the size and _proximity_ of the items around it, and the effect weakens as separation grows (the [Ebbinghaus illusion](https://en.wikipedia.org/wiki/Ebbinghaus_illusion) is the classic demonstration). Close neighbors continuously cross-calibrate each other, so the pixel-level balancing Logo Soup computes actually gets _perceived_.
+
+Widen the gaps and that calibration signal falls off. Each logo is now judged in isolation against its own patch of whitespace, where different cues dominate: **ink density**, stroke weight, and aspect ratio. A bold, solid wordmark reads heavy and large; a thin, airy mark floats and reads small — even when their measured areas match.
+
+Tight grouping also triggers what perception research calls ensemble averaging: the eye computes a fast "average size" over the group and glosses over small deviations. Isolated logos get individual scrutiny instead, so every residual imbalance becomes visible.
+
+## Seeing it
+
+The same twelve logos, same balancing settings, at a tight 16px gap:
+
+![Logos at a tight 16px gap reading as one balanced row](/images/gap-tight.png)
+
+Now with a wide 96px gap and the same size compensation. Dense marks like SIEMENS, WeTransfer, and poc start to dominate, while lighter marks like MR MARVIS and The Browser Company recede:
+
+![Logos at a wide 96px gap where dense logos visually dominate](/images/gap-wide.png)
+
+## How Logo Soup compensates
+
+Since ink density is the cue that takes over at wide gaps, Logo Soup counteracts it with the mechanism it already has: [density compensation](/how-it-works#3-density-compensation). When you pass a numeric `gap`, the engine scales `densityFactor` up as the gap-to-`baseSize` ratio grows past the default (`28 / 48 ≈ 0.58`), shrinking dense logos and lifting light ones — proportionally to how isolated each logo is.
+
+The same wide 96px gap with gap-aware compensation active (the default when `gap` is numeric):
+
+![Logos at a wide 96px gap with gap-aware density compensation evening out visual weight](/images/gap-wide-compensated.png)
+
+At the default gap the compensation is a no-op, so existing layouts are unaffected. String gaps like `"2rem"` can't be reasoned about relative to `baseSize` and skip the adjustment — prefer numbers if you want it.
+
+```tsx
+// Automatic: numeric gap feeds density compensation
+<LogoSoup logos={logos} gap={96} />
+
+// Opt out by disabling density awareness entirely
+<LogoSoup logos={logos} gap={96} densityAware={false} />
+
+// Headless usage works the same way
+const { normalizedLogos } = useLogoSoup({ logos, gap: 96 });
+```
+
+## Layout tips
+
+Compensation narrows the perceptual gap, but it can't fully replace neighbor calibration. If the wall looks off, fix the layout first:
+
+- **Keep gaps between 0.5× and 1× your `baseSize`.** The default (28px gap, 48px base) sits in this range. Beyond ~2× the isolation effect dominates.
+- **Prefer centered rows with a uniform gap** over `justify-content: space-between` or justified grids. Variable whitespace between items reads as misalignment even when nothing is misaligned.
+- **Avoid sparse grids with few large cells.** Many logos in tight rows read as one calm texture; a handful of isolated logos invites item-by-item comparison.
+- **Dark backgrounds amplify the effect.** Light logos on dark bloom outward ([irradiation](/how-it-works#4-irradiation-compensation)), so wide gaps hurt more there. Tighten up or pass `backgroundColor` so the engine can correct for it.

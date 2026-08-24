@@ -141,6 +141,7 @@ export function createLogoSoup(): LogoSoupEngine {
       densityFactor = DEFAULT_DENSITY_FACTOR,
       cropToContent = DEFAULT_CROP_TO_CONTENT,
       backgroundColor: backgroundColorProp,
+      gap,
     } = options;
 
     // Empty logos — go straight to ready with empty results
@@ -194,6 +195,8 @@ export function createLogoSoup(): LogoSoupEngine {
     const effectiveDensityFactor = resolveDensityFactor(
       densityAware,
       densityFactor,
+      gap,
+      baseSize,
     );
 
     const processKey = JSON.stringify([

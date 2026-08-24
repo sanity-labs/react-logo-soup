@@ -3,6 +3,7 @@ import {
   calculateNormalizedDimensions,
   createNormalizedLogo,
   normalizeSource,
+  resolveDensityFactor,
 } from "../src/core/normalize";
 import type { LogoSource, MeasurementResult } from "../src/core/types";
 
@@ -30,6 +31,33 @@ describe("normalizeSource", () => {
     };
     const result = normalizeSource(source);
     expect(result).toEqual({ src: "https://example.com/logo.png" });
+  });
+});
+
+describe("resolveDensityFactor", () => {
+  test("returns 0 when density-aware is off, regardless of gap", () => {
+    expect(resolveDensityFactor(false, 0.5, 200)).toBe(0);
+  });
+
+  test("default gap-to-baseSize ratio leaves the factor unchanged", () => {
+    expect(resolveDensityFactor(true, 0.5, 28, 48)).toBe(0.5);
+    expect(resolveDensityFactor(true, 0.5)).toBe(0.5);
+  });
+
+  test("wider gaps boost density compensation, clamped at 1", () => {
+    const boosted = resolveDensityFactor(true, 0.5, 96, 48);
+    expect(boosted).toBeGreaterThan(0.5);
+    expect(boosted).toBeLessThanOrEqual(1);
+    expect(resolveDensityFactor(true, 0.9, 500, 48)).toBe(1);
+  });
+
+  test("tighter-than-default gaps never reduce the factor", () => {
+    expect(resolveDensityFactor(true, 0.5, 0, 48)).toBe(0.5);
+  });
+
+  test("string and non-finite gaps are ignored", () => {
+    expect(resolveDensityFactor(true, 0.5, "2rem", 48)).toBe(0.5);
+    expect(resolveDensityFactor(true, 0.5, Number.NaN, 48)).toBe(0.5);
   });
 });
 
