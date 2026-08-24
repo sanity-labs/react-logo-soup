@@ -330,6 +330,26 @@ describe("createLogoSoup", () => {
     engine.destroy();
   });
 
+  test("wider gap shrinks dense logos further via density compensation", () => {
+    const measurements = {
+      "dense.png": { width: 100, height: 100, pixelDensity: 0.9 },
+    };
+
+    const atDefaultGap = createLogoSoup();
+    atDefaultGap.process({ logos: ["dense.png"], measurements });
+    const defaultWidth =
+      atDefaultGap.getSnapshot().normalizedLogos[0]?.normalizedWidth;
+    atDefaultGap.destroy();
+
+    const atWideGap = createLogoSoup();
+    atWideGap.process({ logos: ["dense.png"], measurements, gap: 120 });
+    const wideWidth =
+      atWideGap.getSnapshot().normalizedLogos[0]?.normalizedWidth;
+    atWideGap.destroy();
+
+    expect(wideWidth).toBeLessThan(defaultWidth!);
+  });
+
   test("keeps previous results visible while a new logo set loads", async () => {
     installMockImage();
     const engine = createLogoSoup();

@@ -2,6 +2,7 @@ import {
   DEFAULT_BASE_SIZE,
   DEFAULT_DENSITY_AWARE,
   DEFAULT_DENSITY_FACTOR,
+  DEFAULT_GAP,
   DEFAULT_SCALE_FACTOR,
 } from "./constants";
 import type {
@@ -47,11 +48,23 @@ export function measurementsEqual(
   return keys.every((key) => a[key] === b[key]);
 }
 
+const GAP_REFERENCE_RATIO = DEFAULT_GAP / DEFAULT_BASE_SIZE;
+const GAP_ISOLATION_BOOST = 0.35;
+
 export function resolveDensityFactor(
   densityAware: boolean = DEFAULT_DENSITY_AWARE,
   densityFactor: number = DEFAULT_DENSITY_FACTOR,
+  gap?: number | string,
+  baseSize: number = DEFAULT_BASE_SIZE,
 ): number {
-  return densityAware ? densityFactor : 0;
+  if (!densityAware) return 0;
+  if (typeof gap !== "number" || !Number.isFinite(gap) || baseSize <= 0) {
+    return densityFactor;
+  }
+  // Wide gaps isolate each logo, so ink density dominates perceived size
+  // (Ebbinghaus size contrast decays with distance) — compensate harder
+  const isolation = Math.max(0, gap / baseSize - GAP_REFERENCE_RATIO);
+  return Math.min(1, densityFactor * (1 + GAP_ISOLATION_BOOST * isolation));
 }
 
 export function normalizeSource(source: string | LogoSource): LogoSource {

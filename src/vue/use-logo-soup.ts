@@ -26,6 +26,8 @@ export type UseLogoSoupOptions = {
   densityFactor?: MaybeRefOrGetter<number | undefined>;
   cropToContent?: MaybeRefOrGetter<boolean | undefined>;
   backgroundColor?: MaybeRefOrGetter<BackgroundColor | undefined>;
+  /** Layout gap between logos; numeric values feed density compensation (wider gaps isolate logos perceptually) */
+  gap?: MaybeRefOrGetter<number | string | undefined>;
 };
 
 export type UseLogoSoupReturn = {
@@ -58,6 +60,7 @@ export function useLogoSoup(options: UseLogoSoupOptions): UseLogoSoupReturn {
       densityFactor: toValue(options.densityFactor),
       cropToContent: toValue(options.cropToContent),
       backgroundColor: toValue(options.backgroundColor),
+      gap: toValue(options.gap),
     });
   });
 

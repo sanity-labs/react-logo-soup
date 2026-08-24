@@ -9,7 +9,6 @@ import type {
 
 export type LogoSoupPluginOptions = ProcessOptions & {
   alignBy?: AlignmentMode;
-  gap?: number | string;
   onReady?: (logos: NormalizedLogo[]) => void;
   onError?: (error: Error) => void;
 };
@@ -190,5 +189,6 @@ function toProcessOptions(opts: LogoSoupPluginOptions): ProcessOptions {
     densityFactor: opts.densityFactor,
     cropToContent: opts.cropToContent,
     backgroundColor: opts.backgroundColor,
+    gap: opts.gap,
   };
 }

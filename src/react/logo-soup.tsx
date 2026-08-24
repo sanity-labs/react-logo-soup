@@ -48,6 +48,7 @@ export function LogoSoup({
     densityFactor,
     cropToContent,
     backgroundColor,
+    gap,
   });
 
   const ImageComponent = renderImage || DefaultImage;
